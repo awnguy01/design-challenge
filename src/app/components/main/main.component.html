@@ -1,0 +1,24 @@
+<header class="main__menu--above">
+  <button [class]="isFull ? 'main__menu-toggle--black' : 'main__menu-toggle--white'" (click)="toggleMenu()"></button>
+</header>
+<div class="main__backdrop">
+  <header class="main__menu--below">
+    <ul>
+      <li [class]="isLinkActive('/home') ? 'main__link--active-0' : 'main__link--0'">
+        <a routerLink="home">Home</a>
+      </li>
+      <li [class]="isLinkActive('/designs') ? 'main__link--active-1' : 'main__link--1'">
+        <a routerLink="designs">Designs</a>
+      </li>
+      <li [class]="isLinkActive('/contact') ? 'main__link--active-2' : 'main__link--2'">
+        <a routerLink="contact">Contact</a>
+      </li>
+      <hr class="main__menu-indicator">
+    </ul>
+  </header>
+</div>
+<div [class]="isFull ? 'main__container--full' : 'main__container--shrunk'">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

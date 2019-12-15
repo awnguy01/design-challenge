@@ -1,0 +1,134 @@
+.main {
+  &__backdrop {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background: url('src/assets/backgrounds/lighthouse_background.jpg');
+    background-position-y: -2rem;
+    background-size: cover;
+  }
+  &__container {
+    @mixin container($full: true) {
+      position: absolute;
+      bottom: if($full, 1vh, 1rem);
+      left: 50%;
+      box-sizing: border-box;
+      width: if($full, 99vw, 85vw);
+      height: if($full, 98vh, 80vh);
+      padding: 1rem;
+      transition: all 250ms, border-radius 500ms;
+      transform: translateX(-50%);
+      border-radius: 1rem;
+      background: url('src/assets/backgrounds/topography.png');
+    }
+
+    &--full {
+      @include container();
+    }
+    &--shrunk {
+      @include container(false);
+    }
+  }
+  &__menu {
+    &--above {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      display: flex;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+    &--below {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 6rem;
+      ul {
+        padding: 0;
+        list-style: none;
+      }
+      li {
+        display: inline-flex;
+        justify-content: center;
+        width: 5rem;
+        margin: 0 1rem;
+        &.main__link {
+          @mixin indicator($index: 0) {
+            @if ($index == 0) {
+              width: 43px;
+              margin-left: 33px;
+            } @else if ($index == 1) {
+              width: 63px;
+              margin-left: 135px;
+            } @else if ($index == 2) {
+              width: 60px;
+              margin-left: 249px;
+            }
+          }
+
+          &--active {
+            &-0 ~ hr {
+              @include indicator(0);
+            }
+            &-1 ~ hr {
+              @include indicator(1);
+            }
+            &-2 ~ hr {
+              @include indicator(2);
+            }
+          }
+
+          &--0:hover ~ hr {
+            @include indicator(0);
+          }
+          &--1:hover ~ hr {
+            @include indicator(1);
+          }
+          &--2:hover ~ hr {
+            @include indicator(2);
+          }
+        }
+      }
+      a {
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: solid;
+        color: white;
+      }
+    }
+  }
+
+  @mixin toggle($img-url) {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    transition: all 250ms;
+    border: none;
+    background: url($img-url);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &__menu-links {
+    display: flex;
+  }
+  &__menu-indicator {
+    margin-top: .25rem;
+
+    // width: 4rem;
+
+    transition: all 250ms;
+    border: 1.5px solid white;
+  }
+  &__menu-toggle {
+    &--black {
+      @include toggle('src/assets/icons/menu_navigation_grid_black.svg');
+    }
+    &--white {
+      @include toggle('src/assets/icons/menu_navigation_grid_white.svg');
+    }
+  }
+}
